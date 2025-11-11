@@ -131,18 +131,18 @@ if uploaded_csv is not None and uploaded_model is not None:
     # Show metrics
     st.header("Before vs After (aggregate)")
     c1, c2, c3 = st.columns(3)
-    #c1.metric("Total time (before) min", f\"{baseline_time:.1f}\", delta=None)
-    #c2.metric("Total time (after) min", f\"{predicted_total_time:.1f}\", delta=f\"{baseline_time - predicted_total_time:.1f}\")
-    #c3.metric("Time saved (min)", f\"{baseline_time - predicted_total_time:.1f}\")
+    #c1.metric("Total time (before) min", f"{baseline_time:.1f}", delta=None)
+    #c2.metric("Total time (after) min", f"{predicted_total_time:.1f}", delta=f"{baseline_time - predicted_total_time:.1f}")
+    #c3.metric("Time saved (min)", f"{baseline_time - predicted_total_time:.1f}")
 
     c1.metric("Total time (before) min", f"{baseline_time:.1f}", delta=None)
     c2.metric("Total time (after) min", f"{predicted_total_time:.1f}", delta=f"{baseline_time - predicted_total_time:.1f}")
     c3.metric("Time saved (min)", f"{baseline_time - predicted_total_time:.1f}")
 
     c4, c5, c6 = st.columns(3)
-    #c4.metric("Total cost (before) INR", f\"{baseline_cost:.2f}\")
-    #c5.metric("Total cost (after) INR", f\"{predicted_total_cost:.2f}\", delta=f\"{baseline_cost - predicted_total_cost:.2f}\")
-    #c6.metric("Fuel saved (liters)", f\"{fuel_saved_liters:.2f}\")
+    #c4.metric("Total cost (before) INR", f"{baseline_cost:.2f}")
+    #c5.metric("Total cost (after) INR", f"{predicted_total_cost:.2f}", delta=f"{baseline_cost - predicted_total_cost:.2f}")
+    #c6.metric("Fuel saved (liters)", f"{fuel_saved_liters:.2f}")
 
     c4.metric("Total cost (before) INR", f"{baseline_cost:.2f}")
     c5.metric("Total cost (after) INR", f"{predicted_total_cost:.2f}", delta=f"{baseline_cost - predicted_total_cost:.2f}")
@@ -155,15 +155,15 @@ if uploaded_csv is not None and uploaded_model is not None:
     if 'Delivery_Time_Minutes' in df_proc.columns:
         mae = mean_absolute_error(df_proc['Delivery_Time_Minutes'], df_proc['predicted_eta_min'])
         rmse = mean_squared_error(df_proc['Delivery_Time_Minutes'], df_proc['predicted_eta_min'], squared=False)
-        st.write(f\"Model MAE: {mae:.2f} min, RMSE: {rmse:.2f} min\")
+        st.write(f"Model MAE: {mae:.2f} min, RMSE: {rmse:.2f} min")
 
     # Allow download of results
     def convert_df_to_csv(df_out):
         return df_out.to_csv(index=False).encode('utf-8')
 
     csv_out = convert_df_to_csv(df_proc)
-    st.download_button(\"Download results CSV\", csv_out, file_name=\"predicted_results.csv\", mime='text/csv')
+    st.download_button("Download results CSV", csv_out, file_name="predicted_results.csv", mime='text/csv')
 
-    st.success(\"Analysis complete — use Optimize endpoint later to compute route-level savings.\")
+    st.success("Analysis complete — use Optimize endpoint later to compute route-level savings.")
 else:
-    st.info(\"Upload both CSV and model artifact to run analysis.\")
+    st.info("Upload both CSV and model artifact to run analysis.")
