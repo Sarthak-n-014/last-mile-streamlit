@@ -131,14 +131,22 @@ if uploaded_csv is not None and uploaded_model is not None:
     # Show metrics
     st.header("Before vs After (aggregate)")
     c1, c2, c3 = st.columns(3)
-    c1.metric("Total time (before) min", f\"{baseline_time:.1f}\", delta=None)
-    c2.metric("Total time (after) min", f\"{predicted_total_time:.1f}\", delta=f\"{baseline_time - predicted_total_time:.1f}\")
-    c3.metric("Time saved (min)", f\"{baseline_time - predicted_total_time:.1f}\")
+    #c1.metric("Total time (before) min", f\"{baseline_time:.1f}\", delta=None)
+    #c2.metric("Total time (after) min", f\"{predicted_total_time:.1f}\", delta=f\"{baseline_time - predicted_total_time:.1f}\")
+    #c3.metric("Time saved (min)", f\"{baseline_time - predicted_total_time:.1f}\")
+
+    c1.metric("Total time (before) min", f"{baseline_time:.1f}", delta=None)
+    c2.metric("Total time (after) min", f"{predicted_total_time:.1f}", delta=f"{baseline_time - predicted_total_time:.1f}")
+    c3.metric("Time saved (min)", f"{baseline_time - predicted_total_time:.1f}")
 
     c4, c5, c6 = st.columns(3)
-    c4.metric("Total cost (before) INR", f\"{baseline_cost:.2f}\")
-    c5.metric("Total cost (after) INR", f\"{predicted_total_cost:.2f}\", delta=f\"{baseline_cost - predicted_total_cost:.2f}\")
-    c6.metric("Fuel saved (liters)", f\"{fuel_saved_liters:.2f}\")
+    #c4.metric("Total cost (before) INR", f\"{baseline_cost:.2f}\")
+    #c5.metric("Total cost (after) INR", f\"{predicted_total_cost:.2f}\", delta=f\"{baseline_cost - predicted_total_cost:.2f}\")
+    #c6.metric("Fuel saved (liters)", f\"{fuel_saved_liters:.2f}\")
+
+    c4.metric("Total cost (before) INR", f"{baseline_cost:.2f}")
+    c5.metric("Total cost (after) INR", f"{predicted_total_cost:.2f}", delta=f"{baseline_cost - predicted_total_cost:.2f}")
+    c6.metric("Fuel saved (liters)", f"{fuel_saved_liters:.2f}")
 
     st.subheader("Per-delivery sample")
     st.dataframe(df_proc[['Delivery_ID','Distance_km','Delivery_Time_Minutes','predicted_eta_min']].head(50))
